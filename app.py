@@ -10,7 +10,6 @@ app = Flask(__name__)
 mongo = PyMongo(app)
 
 
-
 @app.route("/scrape")
 def scrape():
     mars = mongo.db.mars
