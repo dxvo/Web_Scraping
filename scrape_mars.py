@@ -8,9 +8,6 @@ def init_browser():
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     browser = Browser('chrome', **executable_path, headless=False)
 
-
-
-
 def scrape():
     # to store all info 
     mars_dict = {}
@@ -36,10 +33,7 @@ def scrape():
     mars_dict["news_p"] = news_p
     
 
-
-
     #JPL Feature Image
-
     #Visit the image site and create 
     image_page = "https://jpl.nasa.gov/spaceimages/?search=&category=Mars"
     browser.visit(image_page)
@@ -121,4 +115,6 @@ def scrape():
         
     #print(mars_image_url_list)
     mars_dict["mars_image_url_list"] = mars_image_url_list
+
+    return mars_dict
 
