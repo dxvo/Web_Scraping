@@ -7,14 +7,14 @@ import time
 def init_browser():
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     browser = Browser('chrome', **executable_path, headless=False)
+    return browser
+
 
 def scrape():
     # to store all info 
     mars_dict = {}
     browser = init_browser()
     
-
-
     #Search for NEWS 
     url = "https://mars.nasa.gov/news/?page=0&per_page=40&order="\
     "publish_date+desc%2Ccreated_at+desc&search=&category=19%2C165%2C184%2C204&blank_scope=Latest"
@@ -30,6 +30,8 @@ def scrape():
     news_title = soup.find("div", class_="content_title").text
     news_p = soup.find("div", class_="article_teaser_body").text
     mars_dict["news_title"] = news_title
+    print(news_title)
+    print(news_p)
     mars_dict["news_p"] = news_p
     
 
@@ -44,13 +46,16 @@ def scrape():
     img_html = browser.html
     soup = bs(img_html, 'html.parser')
     browser.click_link_by_partial_text('FULL IMAGE')
+    time.sleep(2)
 
     #getting image url
     img_html = browser.html
     soup_img = bs(img_html, "html.parser")
     img_url = soup_img.find("img", class_="fancybox-image")
+    print(img_url['src'])
     feature_img_url = "https://jpl.nasa.gov" + img_url["src"]
-    #print(feature_img_url)
+    print(feature_img_url)
+    #append link to dictionary 
     mars_dict["feature_img_url"] = feature_img_url
 
 
@@ -65,7 +70,8 @@ def scrape():
     weather_soup = bs(weather_html, "html.parser")
 
     mars_weather = weather_soup.find("p", class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
-    #print(mars_weather)
+    print(mars_weather)
+    #append to dictionary 
     mars_dict["mars_weather"] = mars_weather
 
 
@@ -85,6 +91,8 @@ def scrape():
     #Convert DataFrame to html
     mars_html_profile = mars_profile.to_html()
     mars_html_profile = mars_html_profile.replace("\n", "")
+
+    print(mars_html_profile)
     mars_dict["mars_html_profile"] = mars_html_profile
 
 
@@ -99,7 +107,7 @@ def scrape():
     mars_image_url_list=[]
 
     for i in range (4):
-        time.sleep(2)
+        time.sleep(1)
         img = browser.find_by_tag('h3')
         img[i].click()
         new_html = browser.html
@@ -110,11 +118,13 @@ def scrape():
         img_url = "https://astrogeology.usgs.gov" + img_url
         
         img_details = {"title":img_title,"img_url":img_url}
+
+        print(img_details)
         mars_image_url_list.append(img_details)
         browser.back()
         
     #print(mars_image_url_list)
     mars_dict["mars_image_url_list"] = mars_image_url_list
 
-    return mars_dict
 
+    return mars_dict
