@@ -39,23 +39,25 @@
 
     <div class="container-fluid">
       <div class="row" style="padding-top: 20px;">
-        <div class="col-md-7">
+        <div class="col-md-12">
           <h2>Featured Image.</h2>
-          <img src="{{mars.feature_img_url}}" alt="Mars featured image" style=" width = 70% padding-bottom: 10px;" />
+          <img src="{{mars.feature_img_url}}" alt="Mars featured image" style="width =80% padding-bottom: 10px;" />
         </div>
 
-        <div class="col-md-5">
-              <h3>Current Mars Weather</h3>
+        <div class = row style="padding-top: 15px; padding-bottom: 15px;">
+          <div class="col-md-6">
+            <h3>Current Mars Weather</h3>
               <p>
                 {{mars.mars_weather}}
               </p>
-
+            </div>
+            <div class="col-md-6">
               <h3>Mars Facts</h3>
               {{mars.mars_html_profile | safe }}
-        </div>
-
+            </div>
           </div>
         </div>
+      </div>
 
       </div>
     </div>
