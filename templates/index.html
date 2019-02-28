@@ -20,7 +20,7 @@
 <body>
   <div class="container">
 
-    <div class="jumbotron">
+    <div class="jumbotron text-center">
       <h1>Mission to Mars</h1>
       <p>
         <a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a>
@@ -31,7 +31,7 @@
       <div class="row">
         <div class="col-md-12">
           <h2>Latest Mars news.</h2>
-          <h4> {{mars.news_title}}</h4>
+          <h5> {{mars.news_title}}</h5>
           <p> {{mars.news_p}} </p>
         </div>
       </div>
@@ -40,14 +40,14 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-8 big_box">
-          <h2>Featured Mars Image</h2>
-          <img src="{{mars.feature_img_url}}" alt="Featured image" />
+          <h2>This is the featured image from JPL.</h2>
+          <img src="{{mars.feature_img_url}}" alt="Mars featured image" style="width: 90% padding-bottom: 20px;" />
         </div>
 
         <div class="col-md-4">
           <div class="row weather-box">
             <div class="col-md-12">
-              <h3>Current Weather on Mars</h3>
+              <h3>The current weather on Mars</h3>
               <p>
                 {{mars.mars_weather}}
               </p>
@@ -55,18 +55,20 @@
           </div>
 
           <div class="col-md-12">
-            <h3>Mars Facts</h3>
-            {{mars.mars_html_profile}}
+            <h3>Mars facts</h3>
+            {{mars.mars_html_profile | safe }}
           </div>
         </div>
 
       </div>
 
     </div>
+
+    </div>
     <div class="container-fluid">
 
-      <div class="jumbotron">
-        <h1>Mars Hemispheres</h1>
+      <div class="jumbotron text-center">
+        <h1 style="padding-bottom: 20px;">Mars Hemispheres</h1>
 
         <div class="row">
           <div class="col-md-6">
@@ -74,7 +76,8 @@
             <h3>{{mars.mars_image_url_list[0]['title']}}</h3>
           </div>
           <div class="col-md-6">
-            <img src="{{mars.mars_image_url_list[1]['img_url']}}" alt="Mars Hemisphere2" style="width:400px;height:400px;border:0;">
+            <img src="{{mars.mars_image_url_list[1]['img_url']}}" alt="Mars Hemisphere2" 
+            style="width:400px;height:400px;border:0 padding-bottom = 15px;">
             <h3>{{mars.mars_image_url_list[1]['title']}}</h3>
           </div>
         </div>
@@ -90,7 +93,6 @@
             <h3>{{mars.mars_image_url_list[1]['title']}}</h3>
           </div>
         </div>
-
 
       </div>
     </div>
